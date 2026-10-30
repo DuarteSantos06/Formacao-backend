@@ -11,12 +11,25 @@ API REST de uma lista de tarefas, em Spring Boot com PostgreSQL. O exercício es
 ## 2. Correr
 
 1. Abre a pasta do projeto no IntelliJ e espera que o Maven descarregue as dependências.
-2. *Run → Edit Configurations → TasksApplication → Environment variables*, com o IP que o formador
-   escrever no quadro:
+2. *Run → Edit Configurations → TasksApplication → Environment variables*, com a password que o
+   formador te der:
 
    ```
-   DB_HOST=<IP do formador>
+   DB_PASSWORD=<password do formador>
    ```
+
+   Ou no terminal:
+
+   ```bash
+   # macOS / Linux
+   DB_PASSWORD=<password> mvn spring-boot:run
+
+   # Windows (PowerShell)
+   $env:DB_PASSWORD="<password>"; mvn spring-boot:run
+   ```
+
+   Se no arranque aparecer `password authentication failed`, a variável não foi aplicada ou a
+   password está errada.
 
 3. Corre `TasksApplication` (▶). A API fica em `http://localhost:8080/api/tasks`.
 

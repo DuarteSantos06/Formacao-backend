@@ -2,14 +2,17 @@ spring:
   application:
     name: tasks-api
 
-  # PostgreSQL database (no Docker).
-  # By default it connects to the Postgres on your machine (localhost, database "tarefas").
-  # During the training: DB_HOST = the trainer's IP (everyone uses the same "tarefas" database).
-  # Set them as environment variables or change the values after the ':'.
+  # PostgreSQL database shared by everyone in the training (database "tarefas" on the In-Nova server).
+  # The password is not in the repo: set DB_PASSWORD with the value the trainer gives you.
+  # To use a Postgres on your own machine instead: DB_HOST=localhost.
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:tarefas}
+    url: jdbc:postgresql://${DB_HOST:13.140.28.157}:${DB_PORT:5432}/${DB_NAME:tarefas}
     username: ${DB_USER:formando}
-    password: ${DB_PASSWORD:formando}
+    password: ${DB_PASSWORD:}
+    hikari:
+      # Everyone shares the trainer's Postgres: 3 connections per app instead of the default 10,
+      # so it doesn't run out of connections.
+      maximum-pool-size: 3
 
   jpa:
     hibernate:
